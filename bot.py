@@ -127,6 +127,3 @@ def sleep(seconds):
 
 # Mettre en veille le script pendant 1 heure
 sleep(3600)
-
-ordres = exchange.fetch_my_trades(coin)
-"""""""""""
