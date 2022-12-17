@@ -100,30 +100,24 @@ def ouvrir(row):
     stop_loss = buy_price - 2 * row['ATR'][-1]
     take_profit = buy_price + 4 * row['ATR'][-1]
     if open_long(row) == True and usdt_free > 0:
-        print("Prise de position long")
+        print("Prise de position long ", row['timestamp][-1])
         # exchange.create_market_buy_order(symbol=coin, amount= amount_position)
 # ---------------- Ordre Take profit ---------------------
     elif row['high'][-1] < take_profit and btc_total > 0:
-        print("TP", row['high'][-1], take_profit)
+        print("TP" , row['high'][-1], take_profit)
         # exchange.create_market_sell_order(symbol=coin, amount=btc_total)
         print("Take profit")
 # ----------------------Ordre Stop Loss -----------------------------
     elif row['low'][-1] < stop_loss and btc_total > 0:
-        print("Stop Loss")
-        # exchange.create_market_sell_order(symbol=coin, amount=btc_total)
+        print("Stop Loss ", row['timestamp][-1])
+        exchange.create_market_sell_order(symbol=coin, amount=btc_total)
     elif close_long(row) == True and btc_total > 0:
-        # exchange.create_market_sell_order(symbol=coin, amount=btc_total)
-        print("Fermeture de position long")
+        exchange.create_market_sell_order(symbol=coin, amount=btc_total)
+        print("Fermeture de position long ", row['timestamp][-1])
     else:
         print("Il ne se passe rien ....")
 
 
 
 ouvrir(prix)
-""""""""""
 
-def sleep(seconds):
-    time.sleep(seconds)
-
-# Mettre en veille le script pendant 1 heure
-sleep(3600)
